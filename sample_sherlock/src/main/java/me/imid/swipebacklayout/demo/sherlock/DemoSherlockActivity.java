@@ -1,6 +1,8 @@
 
-package me.imid.swipebacklayout.demo;
+package me.imid.swipebacklayout.demo.sherlock;
 
+import me.imid.swipebacklayout.demo.sherlock.R;
+import me.imid.swipebacklayout.lib.SwipeBackLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,18 +10,16 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
 
-import me.imid.swipebacklayout.lib.SwipeBackLayout;
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 /**
- * Created by Issac on 8/11/13.
+ * sample for using actionbar sherlock
  */
-public class DemoActivity extends SwipeBackActivity implements View.OnClickListener {
+public class DemoSherlockActivity extends SwipeBackSherlockActivity implements View.OnClickListener {
     private static final int VIBRATE_DURATION = 20;
 
     private int[] mBgColors;
@@ -62,7 +62,7 @@ public class DemoActivity extends SwipeBackActivity implements View.OnClickListe
                 saveTrackingMode(edgeFlag);
             }
         });
-        mSwipeBackLayout.addSwipeListener(new SwipeBackLayout.SwipeListener() {
+        mSwipeBackLayout.setSwipeListener(new SwipeBackLayout.SwipeListener() {
             @Override
             public void onScrollStateChange(int state, float scrollPercent) {
 
@@ -111,7 +111,7 @@ public class DemoActivity extends SwipeBackActivity implements View.OnClickListe
     }
 
     private void changeActionBarColor() {
-        getActionBar().setBackgroundDrawable(new ColorDrawable(getColors()[mBgIndex]));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getColors()[mBgIndex]));
         mBgIndex++;
         if (mBgIndex >= getColors().length) {
             mBgIndex = 0;
@@ -150,7 +150,7 @@ public class DemoActivity extends SwipeBackActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_start:
-                startActivity(new Intent(DemoActivity.this, DemoActivity.class));
+                startActivity(new Intent(DemoSherlockActivity.this, DemoSherlockActivity.class));
                 break;
             case R.id.btn_finish:
                 scrollToFinishActivity();
@@ -160,7 +160,7 @@ public class DemoActivity extends SwipeBackActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getSupportMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
